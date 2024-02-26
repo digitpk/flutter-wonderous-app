@@ -6,8 +6,8 @@ import 'package:wonders/ui/common/controls/app_loading_indicator.dart';
 import 'package:wonders/ui/common/gradient_container.dart';
 import 'package:wonders/ui/common/modals/fullscreen_url_img_viewer.dart';
 
-part 'widgets/_info_column.dart';
 part 'widgets/_artifact_image_btn.dart';
+part 'widgets/_info_column.dart';
 
 class ArtifactDetailsScreen extends StatefulWidget {
   const ArtifactDetailsScreen({super.key, required this.artifactId});
@@ -18,7 +18,8 @@ class ArtifactDetailsScreen extends StatefulWidget {
 }
 
 class _ArtifactDetailsScreenState extends State<ArtifactDetailsScreen> {
-  late final _future = artifactLogic.getArtifactByID(widget.artifactId, selfHosted: true);
+  late final _future =
+      artifactLogic.getArtifactByID(widget.artifactId, selfHosted: true);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,10 @@ class _ArtifactDetailsScreenState extends State<ArtifactDetailsScreen> {
             content = hzMode
                 ? Row(children: [
                     Expanded(child: _ArtifactImageBtn(data: data!)),
-                    Expanded(child: Center(child: SizedBox(width: 600, child: _InfoColumn(data: data)))),
+                    Expanded(
+                        child: Center(
+                            child: SizedBox(
+                                width: 600, child: _InfoColumn(data: data)))),
                   ])
                 : CustomScrollView(
                     slivers: [

@@ -1,7 +1,11 @@
 import 'package:wonders/common_libs.dart';
 
 class EightWaySwipeDetector extends StatefulWidget {
-  const EightWaySwipeDetector({super.key, required this.child, this.threshold = 50, required this.onSwipe});
+  const EightWaySwipeDetector(
+      {super.key,
+      required this.child,
+      this.threshold = 50,
+      required this.onSwipe});
   final Widget child;
   final double threshold;
   final void Function(Offset dir)? onSwipe;

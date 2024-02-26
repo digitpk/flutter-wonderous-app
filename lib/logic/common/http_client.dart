@@ -17,7 +17,8 @@ enum MethodType { get, post, put, patch, delete, head }
 typedef HttpRequest = Future<http.Response> Function();
 
 class HttpClient {
-  static Future<HttpResponse> get(String url, {Map<String, String>? headers}) async {
+  static Future<HttpResponse> get(String url,
+      {Map<String, String>? headers}) async {
     return await _request(() async {
       return await http.get(Uri.parse(url), headers: headers);
     });

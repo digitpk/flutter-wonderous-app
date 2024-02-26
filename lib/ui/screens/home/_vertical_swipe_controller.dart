@@ -2,7 +2,8 @@ part of 'wonders_home_screen.dart';
 
 class _VerticalSwipeController {
   _VerticalSwipeController(this.ticker, this.onSwipeComplete) {
-    swipeReleaseAnim = AnimationController(vsync: ticker)..addListener(handleSwipeReleaseAnimTick);
+    swipeReleaseAnim = AnimationController(vsync: ticker)
+      ..addListener(handleSwipeReleaseAnimTick);
   }
   final TickerProvider ticker;
   final swipeAmt = ValueNotifier<double>(0);
@@ -26,7 +27,9 @@ class _VerticalSwipeController {
     if (swipeReleaseAnim.isAnimating) swipeReleaseAnim.stop();
 
     isPointerDown.value = true;
-    double value = (swipeAmt.value - details.delta.dy / _pullToViewDetailsThreshold).clamp(0, 1);
+    double value =
+        (swipeAmt.value - details.delta.dy / _pullToViewDetailsThreshold)
+            .clamp(0, 1);
     if (value != swipeAmt.value) {
       swipeAmt.value = value;
       if (swipeAmt.value == 1) {
@@ -40,7 +43,10 @@ class _VerticalSwipeController {
   /// Utility method to wrap a couple of ValueListenableBuilders and pass the values into a builder methods.
   /// Saves the UI some boilerplate when subscribing to changes.
   Widget buildListener(
-      {required Widget Function(double swipeUpAmt, bool isPointerDown, Widget? child) builder, Widget? child}) {
+      {required Widget Function(
+              double swipeUpAmt, bool isPointerDown, Widget? child)
+          builder,
+      Widget? child}) {
     return ValueListenableBuilder<double>(
       valueListenable: swipeAmt,
       builder: (_, swipeAmt, __) => ValueListenableBuilder<bool>(

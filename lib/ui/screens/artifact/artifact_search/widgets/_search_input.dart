@@ -33,8 +33,11 @@ class _SearchInput extends StatelessWidget {
       ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
   }
 
-  Widget _buildSuggestionsView(BuildContext context, onSelected, Iterable<String> results, BoxConstraints constraints) {
-    List<Widget> items = results.map((str) => _buildSuggestion(context, str, () => onSelected(str))).toList();
+  Widget _buildSuggestionsView(BuildContext context, onSelected,
+      Iterable<String> results, BoxConstraints constraints) {
+    List<Widget> items = results
+        .map((str) => _buildSuggestion(context, str, () => onSelected(str)))
+        .toList();
     items.insert(0, _buildSuggestionTitle(context));
     return Stack(
       children: [
@@ -83,21 +86,26 @@ class _SearchInput extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all($styles.insets.xs).copyWith(top: 0),
       margin: EdgeInsets.only(bottom: $styles.insets.xxs),
-      decoration: BoxDecoration(border: Border(bottom: BorderSide(color: $styles.colors.greyStrong.withOpacity(0.1)))),
+      decoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(
+                  color: $styles.colors.greyStrong.withOpacity(0.1)))),
       child: CenterLeft(
         child: DefaultTextStyle(
           style: $styles.text.title2.copyWith(color: $styles.colors.black),
           child: Text(
             $strings.searchInputTitleSuggestions.toUpperCase(),
             overflow: TextOverflow.ellipsis,
-            textHeightBehavior: TextHeightBehavior(applyHeightToFirstAscent: false),
+            textHeightBehavior:
+                TextHeightBehavior(applyHeightToFirstAscent: false),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildSuggestion(BuildContext context, String suggestion, VoidCallback onPressed) {
+  Widget _buildSuggestion(
+      BuildContext context, String suggestion, VoidCallback onPressed) {
     return AppBtn.basic(
       semanticLabel: suggestion,
       onPressed: onPressed,
@@ -105,11 +113,13 @@ class _SearchInput extends StatelessWidget {
         padding: EdgeInsets.all($styles.insets.xs),
         child: CenterLeft(
           child: DefaultTextStyle(
-            style: $styles.text.bodySmall.copyWith(color: $styles.colors.greyStrong),
+            style: $styles.text.bodySmall
+                .copyWith(color: $styles.colors.greyStrong),
             child: Text(
               suggestion,
               overflow: TextOverflow.ellipsis,
-              textHeightBehavior: TextHeightBehavior(applyHeightToFirstAscent: false),
+              textHeightBehavior:
+                  TextHeightBehavior(applyHeightToFirstAscent: false),
             ),
           ),
         ),
@@ -117,7 +127,8 @@ class _SearchInput extends StatelessWidget {
     );
   }
 
-  Widget _buildInput(BuildContext context, TextEditingController textController, FocusNode focusNode, _) {
+  Widget _buildInput(BuildContext context, TextEditingController textController,
+      FocusNode focusNode, _) {
     Color captionColor = $styles.colors.caption;
     return Container(
       height: $styles.insets.xl,
@@ -143,7 +154,8 @@ class _SearchInput extends StatelessWidget {
                 hintStyle: TextStyle(color: captionColor.withOpacity(0.5)),
                 prefixStyle: TextStyle(color: captionColor),
                 focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
-                enabledBorder: UnderlineInputBorder(borderSide: BorderSide.none),
+                enabledBorder:
+                    UnderlineInputBorder(borderSide: BorderSide.none),
                 hintText: $strings.searchInputHintSearch,
               ),
             ),

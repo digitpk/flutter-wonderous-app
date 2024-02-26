@@ -5,8 +5,8 @@ import 'package:wonders/common_libs.dart';
 import 'package:wonders/logic/artifact_api_logic.dart';
 import 'package:wonders/logic/artifact_api_service.dart';
 import 'package:wonders/logic/collectibles_logic.dart';
-import 'package:wonders/logic/native_widget_service.dart';
 import 'package:wonders/logic/locale_logic.dart';
+import 'package:wonders/logic/native_widget_service.dart';
 import 'package:wonders/logic/timeline_logic.dart';
 import 'package:wonders/logic/unsplash_logic.dart';
 import 'package:wonders/logic/wonders_logic.dart';
@@ -41,7 +41,8 @@ class WondersApp extends StatelessWidget with GetItMixin {
       debugShowCheckedModeBanner: false,
       routerDelegate: appRouter.routerDelegate,
       shortcuts: AppShortcuts.defaults,
-      theme: ThemeData(fontFamily: $styles.text.body.fontFamily, useMaterial3: true),
+      theme: ThemeData(
+          fontFamily: $styles.text.body.fontFamily, useMaterial3: true),
       color: $styles.colors.black,
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -74,7 +75,8 @@ void registerSingletons() {
   // Localizations
   GetIt.I.registerLazySingleton<LocaleLogic>(() => LocaleLogic());
   // Home Widget Service
-  GetIt.I.registerLazySingleton<NativeWidgetService>(() => NativeWidgetService());
+  GetIt.I
+      .registerLazySingleton<NativeWidgetService>(() => NativeWidgetService());
 }
 
 /// Add syntax sugar for quickly accessing the main "logic" controllers in the app

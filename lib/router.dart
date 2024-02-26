@@ -19,23 +19,30 @@ class ScreenPaths {
   static String home = '/home';
   static String settings = '/settings';
 
-  static String wonderDetails(WonderType type, {required int tabIndex}) => '$home/wonder/${type.name}?t=$tabIndex';
+  static String wonderDetails(WonderType type, {required int tabIndex}) =>
+      '$home/wonder/${type.name}?t=$tabIndex';
 
   /// Dynamically nested pages, always added on to the existing path
   static String video(String id) => _appendToCurrentPath('/video/$id');
-  static String search(WonderType type) => _appendToCurrentPath('/search/${type.name}');
-  static String maps(WonderType type) => _appendToCurrentPath('/maps/${type.name}');
-  static String timeline(WonderType? type) => _appendToCurrentPath('/timeline?type=${type?.name ?? ''}');
+  static String search(WonderType type) =>
+      _appendToCurrentPath('/search/${type.name}');
+  static String maps(WonderType type) =>
+      _appendToCurrentPath('/maps/${type.name}');
+  static String timeline(WonderType? type) =>
+      _appendToCurrentPath('/timeline?type=${type?.name ?? ''}');
   static String artifact(String id, {bool append = true}) =>
       append ? _appendToCurrentPath('/artifact/$id') : '/artifact/$id';
-  static String collection(String id) => _appendToCurrentPath('/collection${id.isEmpty ? '' : '?id=$id'}');
+  static String collection(String id) =>
+      _appendToCurrentPath('/collection${id.isEmpty ? '' : '?id=$id'}');
 
   static String _appendToCurrentPath(String newPath) {
     final newPathUri = Uri.parse(newPath);
     final currentUri = appRouter.routeInformationProvider.value.uri;
     Map<String, dynamic> params = Map.of(currentUri.queryParameters);
     params.addAll(newPathUri.queryParameters);
-    Uri? loc = Uri(path: '${currentUri.path}/${newPathUri.path}'.replaceAll('//', '/'), queryParameters: params);
+    Uri? loc = Uri(
+        path: '${currentUri.path}/${newPathUri.path}'.replaceAll('//', '/'),
+        queryParameters: params);
     return loc.toString();
   }
 }
@@ -49,7 +56,8 @@ AppRoute get _artifactRoute => AppRoute(
 AppRoute get _timelineRoute {
   return AppRoute(
     'timeline',
-    (s) => TimelineScreen(type: _tryParseWonderType(s.uri.queryParameters['type']!)),
+    (s) => TimelineScreen(
+        type: _tryParseWonderType(s.uri.queryParameters['type']!)),
   );
 }
 
@@ -64,14 +72,18 @@ AppRoute get _collectionRoute {
 /// Routing table, matches string paths to UI Screens, optionally parses params from the paths
 final appRouter = GoRouter(
   redirect: _handleRedirect,
-  errorPageBuilder: (context, state) => MaterialPage(child: PageNotFound(state.uri.toString())),
+  errorPageBuilder: (context, state) =>
+      MaterialPage(child: PageNotFound(state.uri.toString())),
   routes: [
     ShellRoute(
         builder: (context, router, navigator) {
           return WondersAppScaffold(child: navigator);
         },
         routes: [
-          AppRoute(ScreenPaths.splash, (_) => Container(color: $styles.colors.greyStrong)), // This will be hidden
+          AppRoute(
+              ScreenPaths.splash,
+              (_) => Container(
+                  color: $styles.colors.greyStrong)), // This will be hidden
           AppRoute(ScreenPaths.intro, (_) => IntroScreen()),
           AppRoute(ScreenPaths.home, (_) => HomeScreen(), routes: [
             _timelineRoute,
@@ -93,14 +105,16 @@ final appRouter = GoRouter(
                 _artifactRoute,
                 // Youtube Video
                 AppRoute('video/:videoId', (s) {
-                  return FullscreenVideoViewer(id: s.pathParameters['videoId']!);
+                  return FullscreenVideoViewer(
+                      id: s.pathParameters['videoId']!);
                 }),
 
                 // Search
                 AppRoute(
                   'search/:searchType',
                   (s) {
-                    return ArtifactSearchScreen(type: _parseWonderType(s.pathParameters['searchType']));
+                    return ArtifactSearchScreen(
+                        type: _parseWonderType(s.pathParameters['searchType']));
                   },
                   routes: [
                     _artifactRoute,
@@ -136,7 +150,8 @@ class AppRoute extends GoRoute {
               return CustomTransitionPage(
                 key: state.pageKey,
                 child: pageContent,
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
                   return FadeTransition(opacity: animation, child: child);
                 },
               );
@@ -171,4 +186,5 @@ WonderType _parseWonderType(String? value) {
   return _tryParseWonderType(value) ?? fallback;
 }
 
-WonderType? _tryParseWonderType(String value) => WonderType.values.asNameMap()[value];
+WonderType? _tryParseWonderType(String value) =>
+    WonderType.values.asNameMap()[value];
