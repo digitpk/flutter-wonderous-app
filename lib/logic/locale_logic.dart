@@ -13,7 +13,8 @@ class LocaleLogic {
 
   Future<void> load() async {
     Locale locale = _defaultLocal;
-    final localeCode = settingsLogic.currentLocale.value ?? await findSystemLocale();
+    final localeCode =
+        settingsLogic.currentLocale.value ?? await findSystemLocale();
     locale = Locale(localeCode.split('_')[0]);
     if (kDebugMode) {
       // locale = Locale('zh'); // uncomment to test chinese

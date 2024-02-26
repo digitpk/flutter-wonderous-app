@@ -85,7 +85,8 @@ class AppLogic {
     }
   }
 
-  Future<T?> showFullscreenDialogRoute<T>(BuildContext context, Widget child, {bool transparent = false}) async {
+  Future<T?> showFullscreenDialogRoute<T>(BuildContext context, Widget child,
+      {bool transparent = false}) async {
     return await Navigator.of(context).push<T>(
       PageRoutes.dialog<T>(child, duration: $styles.times.pageTransition),
     );
@@ -95,14 +96,16 @@ class AppLogic {
   void handleAppSizeChanged(Size appSize) {
     /// Disable landscape layout on smaller form factors
     bool isSmall = display.size.shortestSide / display.devicePixelRatio < 600;
-    supportedOrientations = isSmall ? [Axis.vertical] : [Axis.vertical, Axis.horizontal];
+    supportedOrientations =
+        isSmall ? [Axis.vertical] : [Axis.vertical, Axis.horizontal];
     _updateSystemOrientation();
     _appSize = appSize;
   }
 
   Display get display => PlatformDispatcher.instance.displays.first;
 
-  bool shouldUseNavRail() => _appSize.width > _appSize.height && _appSize.height > 250;
+  bool shouldUseNavRail() =>
+      _appSize.width > _appSize.height && _appSize.height > 250;
 
   void _updateSystemOrientation() {
     final axisList = _supportedOrientationsOverride ?? supportedOrientations;

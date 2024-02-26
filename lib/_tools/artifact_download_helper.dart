@@ -4,18 +4,17 @@ import 'dart:io';
 import 'package:http/http.dart';
 import 'package:image/image.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:wonders/common_libs.dart';
 import 'package:wonders/logic/data/collectible_data.dart';
 import 'package:wonders/logic/data/highlight_data.dart';
 import 'package:wonders/logic/data/wonders_data/chichen_itza_data.dart';
 import 'package:wonders/logic/data/wonders_data/christ_redeemer_data.dart';
+import 'package:wonders/logic/data/wonders_data/colosseum_data.dart';
 import 'package:wonders/logic/data/wonders_data/great_wall_data.dart';
 import 'package:wonders/logic/data/wonders_data/machu_picchu_data.dart';
 import 'package:wonders/logic/data/wonders_data/petra_data.dart';
 import 'package:wonders/logic/data/wonders_data/pyramids_giza_data.dart';
 import 'package:wonders/logic/data/wonders_data/taj_mahal_data.dart';
-import 'package:wonders/logic/data/wonders_data/colosseum_data.dart';
-
-import 'package:wonders/common_libs.dart';
 
 class ArtifactDownloadHelper extends StatefulWidget {
   const ArtifactDownloadHelper({super.key});
@@ -103,7 +102,8 @@ class _ArtifactDownloadHelperState extends State<ArtifactDownloadHelper> {
     } else {
       debugPrint('Downloading $id');
       // Fetch JSON for id
-      Uri uri = Uri.parse('https://collectionapi.metmuseum.org/public/collection/v1/objects/$id');
+      Uri uri = Uri.parse(
+          'https://collectionapi.metmuseum.org/public/collection/v1/objects/$id');
       final response = await http.get(uri);
       json = jsonDecode(response.body) as Map;
     }

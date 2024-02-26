@@ -16,7 +16,8 @@ class _InfoColumn extends StatelessWidget {
             if (data.culture.isNotEmpty) ...[
               Text(
                 data.culture.toUpperCase(),
-                style: $styles.text.titleFont.copyWith(color: $styles.colors.accent1),
+                style: $styles.text.titleFont
+                    .copyWith(color: $styles.colors.accent1),
               ).animate().fade(delay: 150.ms, duration: 600.ms),
               Gap($styles.insets.xs),
             ],
@@ -25,7 +26,8 @@ class _InfoColumn extends StatelessWidget {
               child: Text(
                 data.title,
                 textAlign: TextAlign.center,
-                style: $styles.text.h2.copyWith(color: $styles.colors.offWhite, height: 1.2),
+                style: $styles.text.h2
+                    .copyWith(color: $styles.colors.offWhite, height: 1.2),
                 maxLines: 5,
                 overflow: TextOverflow.ellipsis,
               ).animate().fade(delay: 250.ms, duration: 600.ms),
@@ -34,7 +36,8 @@ class _InfoColumn extends StatelessWidget {
             Animate().toggle(
                 delay: 500.ms,
                 builder: (_, value, __) {
-                  return CompassDivider(isExpanded: !value, duration: $styles.times.med);
+                  return CompassDivider(
+                      isExpanded: !value, duration: $styles.times.med);
                 }),
             Gap($styles.insets.lg),
             Column(
@@ -43,10 +46,13 @@ class _InfoColumn extends StatelessWidget {
                 ...[
                   _InfoRow($strings.artifactDetailsLabelDate, data.date),
                   _InfoRow($strings.artifactDetailsLabelPeriod, data.period),
-                  _InfoRow($strings.artifactDetailsLabelGeography, data.country),
+                  _InfoRow(
+                      $strings.artifactDetailsLabelGeography, data.country),
                   _InfoRow($strings.artifactDetailsLabelMedium, data.medium),
-                  _InfoRow($strings.artifactDetailsLabelDimension, data.dimension),
-                  _InfoRow($strings.artifactDetailsLabelClassification, data.classification),
+                  _InfoRow(
+                      $strings.artifactDetailsLabelDimension, data.dimension),
+                  _InfoRow($strings.artifactDetailsLabelClassification,
+                      data.classification),
                 ]
                     .animate(interval: 100.ms)
                     .fadeIn(delay: 600.ms, duration: $styles.times.med)
@@ -56,8 +62,12 @@ class _InfoColumn extends StatelessWidget {
             Gap($styles.insets.md),
             Text(
               $strings.homeMenuAboutMet,
-              style: $styles.text.caption.copyWith(color: $styles.colors.accent2),
-            ).animate(delay: 1.5.seconds).fadeIn().slide(begin: Offset(0.2, 0), curve: Curves.easeOut),
+              style:
+                  $styles.text.caption.copyWith(color: $styles.colors.accent2),
+            )
+                .animate(delay: 1.5.seconds)
+                .fadeIn()
+                .slide(begin: Offset(0.2, 0), curve: Curves.easeOut),
             Gap($styles.insets.offset),
           ],
         ),
@@ -84,14 +94,16 @@ class _InfoRow extends StatelessWidget {
               flex: 40,
               child: Text(
                 label.toUpperCase(),
-                style: $styles.text.titleFont.copyWith(color: $styles.colors.accent2),
+                style: $styles.text.titleFont
+                    .copyWith(color: $styles.colors.accent2),
               ),
             ),
             Expanded(
               flex: 60,
               child: Text(
                 value.isEmpty ? '--' : value,
-                style: $styles.text.body.copyWith(color: $styles.colors.offWhite),
+                style:
+                    $styles.text.body.copyWith(color: $styles.colors.offWhite),
               ),
             ),
           ]),
